@@ -17,74 +17,81 @@ cuenta.
 package Servicios;
 
 import Entidades.CuentaBancaria;
+
 import java.util.Scanner;
 
 public class CuentaBancariaServicio {
-    
-    public CuentaBancaria crearCuenta(){
-        
-        Scanner leer = new Scanner(System.in);
-        
+    public Scanner leer = new Scanner(System.in);
+
+    public CuentaBancaria crearCuenta() {
+
         System.out.print("Ingrese numero de cuenta: ");
         int num = leer.nextInt();
-        
+
         System.out.print("Ingrese DNI: ");
         long dni = leer.nextLong();
-        
+
         System.out.print("Ingrese saldo actual: $");
         double saldo = leer.nextDouble();
-        
+
         return new CuentaBancaria(num, dni, saldo);
-        
+
     }
-   public void ingresar(CuentaBancaria cuenta){
-       
-       Scanner leer = new Scanner(System.in);
-       
-       System.out.print("Dinero a ingresar: $");
-       double ingreso = leer.nextDouble();
-       
-       cuenta.setSaldoActual(cuenta.getSaldoActual()+ingreso);
-       
-       System.out.print("Su nuevo saldo es: $" + (cuenta.getSaldoActual()));
-       
-   }
-   
-   public void retirar(CuentaBancaria cuenta){
-       
-       Scanner leer = new Scanner(System.in);
-       
-       System.out.print("Ingrese el monto a retirar: $");
-       double retiro = leer.nextDouble();
-       
-       if(cuenta.getSaldoActual()>=retiro){
-           cuenta.setSaldoActual(cuenta.getSaldoActual()-retiro);
-           System.out.print("Su nuevo saldo es: $" + cuenta.getSaldoActual());
-       } else if(cuenta.getSaldoActual()<retiro || cuenta.getSaldoActual()==0){
-           cuenta.setSaldoActual(0);
-           System.out.println("El importe a retirar es mayor que su saldo");
-           System.out.println("Su saldo actual es: $0");
-       }
 
-   }
-   public void extraccionRapida(CuentaBancaria cuenta){
+    public void ingresar(CuentaBancaria cuenta) {
 
-       cuenta.setSaldoActual(cuenta.getSaldoActual()- (cuenta.getSaldoActual()*0.2));
+        System.out.print("Dinero a ingresar: $");
+        double ingreso = leer.nextDouble();
 
-       System.out.println("Su saldo actual es: $" + cuenta.getSaldoActual());
-   }
+        cuenta.setSaldoActual(cuenta.getSaldoActual() + ingreso);
 
-   public void consultarSaldo(CuentaBancaria cuenta){
+        System.out.print("Su nuevo saldo es: $" + (cuenta.getSaldoActual()));
 
-       System.out.println("Su saldo actual es: $" + cuenta.getSaldoActual());
-   }
+    }
 
-   public void consultarDatos(CuentaBancaria cuenta){
+    public void retirar(CuentaBancaria cuenta) {
 
-       System.out.println("Numero de cuenta: " +cuenta.getNumeroCuenta());
-       System.out.println("DNI: " +cuenta.getDniCliente());
-       System.out.println("Saldo actual: $" +cuenta.getSaldoActual());
-   }
+        System.out.print("Ingrese el monto a retirar: $");
+        double retiro = leer.nextDouble();
 
+        if (cuenta.getSaldoActual() >= retiro) {
+            cuenta.setSaldoActual(cuenta.getSaldoActual() - retiro);
+            System.out.print("Su nuevo saldo es: $" + cuenta.getSaldoActual());
+        } else if (cuenta.getSaldoActual() < retiro || cuenta.getSaldoActual() == 0) {
+            cuenta.setSaldoActual(0);
+            System.out.println("El importe a retirar es mayor que su saldo");
+            System.out.println("Su saldo actual es: $0");
+        }
+
+    }
+
+    public void extraccionRapida(CuentaBancaria cuenta) {
+
+        System.out.print("Solo puede retirar el 20%. Ingrese el monto a retirar: $");
+        double retiro = leer.nextDouble();
+
+        if (retiro < cuenta.getSaldoActual() * 0.2) {
+            cuenta.setSaldoActual(cuenta.getSaldoActual() - retiro);
+
+        } else {
+            System.out.println("Supera el 20%. Solo puede retirar: $" + cuenta.getSaldoActual() * 0.2);
+            cuenta.setSaldoActual(cuenta.getSaldoActual() - cuenta.getSaldoActual() * 0.2);
+        }
+
+        System.out.println("Su saldo actual es: $" + cuenta.getSaldoActual());
+
+    }
+
+    public void consultarSaldo(CuentaBancaria cuenta) {
+
+        System.out.println("Su saldo actual es: $" + cuenta.getSaldoActual());
+    }
+
+    public void consultarDatos(CuentaBancaria cuenta) {
+
+        System.out.println("Numero de cuenta: " + cuenta.getNumeroCuenta());
+        System.out.println("DNI: " + cuenta.getDniCliente());
+        System.out.println("Saldo actual: $" + cuenta.getSaldoActual());
+    }
 
 }

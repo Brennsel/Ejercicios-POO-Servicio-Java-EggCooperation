@@ -35,7 +35,7 @@ public class CafeteraServicio {
 
         } else {
             System.out.println("La capacidad actual de cafe no alcanza para llenar la taza");
-            System.out.println("La taza quedo con " + (taza - caf.getCapadidadActual()) + "ml");
+            System.out.println("La taza quedo con " + caf.getCapadidadActual() + "ml");
             caf.setCapadidadActual(0);
         }
     }
